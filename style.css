@@ -87,6 +87,37 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+.board.generating button {
+  pointer-events: none;
+  opacity: 0.85;
+  transform: scale(0.96);
+}
+
+.board button.generated {
+  animation: generatedPop 0.25s ease forwards;
+}
+
+@keyframes generatedPop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+
+  70% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.finish-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 /* SPILL */
 

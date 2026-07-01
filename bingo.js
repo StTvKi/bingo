@@ -145,14 +145,54 @@ function resetGame() {
     oldLineMessage.remove();
   }
 
+  board.classList.add("generating");
+  finishButton.disabled = true;
+
   const shuffledTexts = shuffleArray([...bingoTexts]);
 
-  squares.forEach((square, index) => {
-    square.classList.remove("active");
-    square.textContent = shuffledTexts[index] || "";
+  squares.forEach((square) => {
+    square.classList.remove("active", "generated");
+    square.disabled = true;
+    square.textContent = "";
   });
 
-  requestAnimationFrame(fitAllText);
+  animateBoardGeneration(shuffledTexts);
+}
+function animateBoardGeneration(finalTexts) {
+  const animationTime = 900;
+  const intervalTime = 55;
+
+  squares.forEach((square, index) => {
+    let elapsed = 0;
+
+    const interval = setInterval(() => {
+      const randomText =
+        bingoTexts[Math.floor(Math.random() * bingoTexts.length)];
+
+      square.textContent = randomText;
+      fitText(square);
+
+      elapsed += intervalTime;
+    }, intervalTime);
+
+    setTimeout(() => {
+      clearInterval(interval);
+
+      square.textContent = finalTexts[index] || "";
+      square.classList.add("generated");
+      square.disabled = false;
+
+      fitText(square);
+    }, animationTime + index * 45);
+  });
+
+  const totalTime = animationTime + squares.length * 45 + 150;
+
+  setTimeout(() => {
+    board.classList.remove("generating");
+    finishButton.disabled = false;
+    requestAnimationFrame(fitAllText);
+  }, totalTime);
 }
 
 function showSummary() {
