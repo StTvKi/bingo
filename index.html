@@ -14,13 +14,30 @@
       <div class="start-box">
         <label for="playerNameInput">Skriv inn navnet ditt</label>
         <input id="playerNameInput" type="text" placeholder="Navn" />
-        <button id="startButton">Start bingo</button>
+        <button id="startButton">Lag mitt bingobrett</button>
       </div>
     </section>
 
     <section class="game-screen" id="gameScreen">
       <div class="player-name" id="playerName"></div>
+
       <div class="board" id="board"></div>
+
+      <button class="finish-button" id="finishButton">
+        Ferdig
+      </button>
+    </section>
+
+    <section class="summary-screen" id="summaryScreen">
+      <div class="summary-box">
+        <h1 id="summaryTitle"></h1>
+        <p id="summarySquares"></p>
+        <p id="summaryLines"></p>
+        <p class="summary-score" id="summaryScore"></p>
+
+        <button id="backToBoardButton">Tilbake til brettet</button>
+        <button id="newGameButton">Nytt brett</button>
+      </div>
     </section>
 
     <div class="full-bingo-message" id="fullBingoMessage">
