@@ -54,6 +54,7 @@ const winningLines = [
 
 let squares = [];
 let completedLines = new Set();
+let currentPlayerName = "";
 
 createBoard();
 
@@ -97,7 +98,9 @@ function startGame() {
     return;
   }
 
-  playerName.textContent = name;
+  currentPlayerName = name;
+  playerName.textContent = `${name} sitt bingobrett`;
+
   startScreen.classList.add("hidden");
   gameScreen.classList.add("visible");
 
@@ -157,6 +160,7 @@ function checkForBingo() {
 
     if (hasLine && !completedLines.has(lineIndex)) {
       completedLines.add(lineIndex);
+      showLineMessage();
       launchConfetti();
     }
 
@@ -166,11 +170,31 @@ function checkForBingo() {
   });
 
   if (completedLines.size === winningLines.length) {
+    fullBingoMessage.textContent = `🎉 Gratulerer ${currentPlayerName}!!!`;
     fullBingoMessage.classList.add("visible");
     playAgainButton.classList.add("visible");
     launchConfetti();
     launchConfetti();
   }
+}
+
+function showLineMessage() {
+  const oldMessage = document.querySelector(".line-message");
+  if (oldMessage) {
+    oldMessage.remove();
+  }
+
+  const message = document.createElement("div");
+  message.className = "line-message";
+
+  const count = completedLines.size;
+  message.textContent = `🎉 Bingo! ${count} av 12 linjer`;
+
+  document.body.appendChild(message);
+
+  setTimeout(() => {
+    message.remove();
+  }, 1800);
 }
 
 function launchConfetti() {
