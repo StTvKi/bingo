@@ -1,29 +1,29 @@
 const bingoTexts = [
-  "SPILLER KLAPPER",
-  "GULT KORT",
-  "MÅL",
-  "OFFSIDE",
-  "NOEN GRINER",
-  "STRAFFE",
-  "SPILLER DANSER",
-  "KAMERA ZOOMER INN PÅ EN I PUBLIKUM",
-  "TRENER VIFTER MED HENDENE",
-  "SPILLER TAR AV TRØYEN",
-  "TRENER RISTER PÅ HODET",
-  "NOEN KLEMMER",
-  "VAR-KONTROLL",
-  "BOMMER PÅ STRAFFE",
-  "STANG INN",
-  "TO MÅL FRA SAMME SPILLER",
-  "CORNER",
   "SKUDD I TVERRLIGGER",
+  "NOEN GRINER",
   "TAKLING",
-  "SPILLER MÅ BÆRES AV BANEN",
-  "TEKNISKE PROBLEMER MED SENDINGEN",
+  "MÅL",
+  "TO MÅL FRA SAMME SPILLER",
+  "SELV MÅL",
+  "STRAFFE",
+  "GULT KORT",
+  "TRENER VIFTER MED HENDENE",
+  "SPILLER KLAPPER",
+  "KAMERA ZOOMER INN PÅ EN I PUBLIKUM",
   "UTSPARK GÅR OVER MIDTBANEN",
-  "SELVMÅL",
-  "SPILLER KRANGLER MED DOMMEREN",
-  "FRISPARK"
+  "STANG INN",
+  "BOMMER PÅ STRAFFE",
+  "TRENER RISTER PÅ HODET",
+  "TEKNISKE PROBLEMER MED SENDINGEN",
+  "OFFSIDE",
+  "CORNER",
+  "SPILLER BÆRES AV BANEN",
+  "SPILLER KRANGLER MED DOMMER",
+  "RØDT KORT",
+  "MÅL ETTER CORNER",
+  "KEEPER REDDER",
+  "VAR-SJEKK",
+  "EKSTRAOMGANGER"
 ];
 
 const startScreen = document.getElementById("startScreen");
@@ -33,8 +33,7 @@ const playAgainButton = document.getElementById("playAgainButton");
 const playerNameInput = document.getElementById("playerNameInput");
 const playerName = document.getElementById("playerName");
 const fullBingoMessage = document.getElementById("fullBingoMessage");
-
-const squares = document.querySelectorAll(".board button");
+const board = document.getElementById("board");
 
 const winningLines = [
   [0, 1, 2, 3, 4],
@@ -53,7 +52,10 @@ const winningLines = [
   [4, 8, 12, 16, 20]
 ];
 
+let squares = [];
 let completedLines = new Set();
+
+createBoard();
 
 startButton.addEventListener("click", startGame);
 
@@ -65,16 +67,27 @@ playerNameInput.addEventListener("keydown", (event) => {
 
 playAgainButton.addEventListener("click", resetGame);
 
-squares.forEach((square) => {
-  square.addEventListener("click", () => {
-    square.classList.toggle("active");
-    checkForBingo();
-  });
+window.addEventListener("resize", () => {
+  fitAllText();
 });
 
-window.addEventListener("resize", () => {
-  squares.forEach(fitText);
-});
+function createBoard() {
+  board.innerHTML = "";
+  squares = [];
+
+  for (let i = 0; i < 25; i++) {
+    const square = document.createElement("button");
+    square.type = "button";
+
+    square.addEventListener("click", () => {
+      square.classList.toggle("active");
+      checkForBingo();
+    });
+
+    board.appendChild(square);
+    squares.push(square);
+  }
+}
 
 function startGame() {
   const name = playerNameInput.value.trim();
@@ -97,16 +110,14 @@ function resetGame() {
   fullBingoMessage.classList.remove("visible");
   playAgainButton.classList.remove("visible");
 
-  squares.forEach((square) => {
-    square.classList.remove("active");
-  });
-
   const shuffledTexts = shuffleArray([...bingoTexts]);
 
   squares.forEach((square, index) => {
-    square.textContent = shuffledTexts[index];
-    fitText(square);
+    square.classList.remove("active");
+    square.textContent = shuffledTexts[index] || "";
   });
+
+  requestAnimationFrame(fitAllText);
 }
 
 function shuffleArray(array) {
@@ -118,9 +129,13 @@ function shuffleArray(array) {
   return array;
 }
 
+function fitAllText() {
+  squares.forEach(fitText);
+}
+
 function fitText(square) {
-  let size = window.innerWidth <= 600 ? 12 : 16;
-  const minSize = window.innerWidth <= 600 ? 5.5 : 8;
+  let size = window.innerWidth < 600 ? 13 : 16;
+  const minSize = window.innerWidth < 600 ? 6 : 8;
 
   square.style.fontSize = size + "px";
 
