@@ -24,6 +24,16 @@ const bingoTexts = [
   "KEEPER REDDER",
   "VAR-SJEKK",
   "SPILLER KNYTER SKOENE"
+  "INNBYTTE",
+  "OFFSIDE",
+  "LANGSKUDD",
+  "FRISPARK I MUREN",
+  "PUBLIKUM TAR BØLGEN",
+  "TRENER ER BORTI BALLEN",
+  "KEEPER BOKSER BALLEN",
+  "SPILLER FÅR KRAMPE",
+  "KOMMENTATOR SIER 'FANTASTISK'",
+  "INNKAST",
 ];
 
 const startScreen = document.getElementById("startScreen");
@@ -148,7 +158,7 @@ function resetGame() {
   board.classList.add("generating");
   finishButton.disabled = true;
 
-  const shuffledTexts = shuffleArray([...bingoTexts]);
+  const shuffledTexts = shuffleArray([...bingoTexts])).slice(0, 25);
 
   squares.forEach((square) => {
     square.classList.remove("active", "generated");
