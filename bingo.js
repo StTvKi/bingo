@@ -158,7 +158,7 @@ function resetGame() {
   board.classList.add("generating");
   finishButton.disabled = true;
 
-  const shuffledTexts = shuffleArray([...bingoTexts])).slice(0, 25);
+  const shuffledTexts = shuffleArray([...bingoTexts]).slice(0, 25);
 
   squares.forEach((square) => {
     square.classList.remove("active", "generated");
