@@ -119,15 +119,17 @@ function shuffleArray(array) {
 }
 
 function fitText(square) {
-  let size = 16;
+  let size = window.innerWidth <= 600 ? 12 : 16;
+  const minSize = window.innerWidth <= 600 ? 5.5 : 8;
+
   square.style.fontSize = size + "px";
 
   while (
     (square.scrollHeight > square.clientHeight ||
       square.scrollWidth > square.clientWidth) &&
-    size > 8
+    size > minSize
   ) {
-    size--;
+    size -= 0.5;
     square.style.fontSize = size + "px";
   }
 }
