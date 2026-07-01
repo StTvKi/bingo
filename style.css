@@ -308,3 +308,63 @@ body {
     transform: translate(-50%, -12px);
   }
 }
+.finish-button {
+  display: block;
+  margin: 18px auto 0;
+  padding: 12px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #222;
+  color: white;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.summary-screen {
+  display: none;
+  width: min(92vw, 460px);
+}
+
+.summary-screen.visible {
+  display: block;
+}
+
+.summary-box {
+  padding: 24px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.summary-box h1 {
+  margin-top: 0;
+}
+
+.summary-score {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.summary-box button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #222;
+  color: white;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  cursor: pointer;
+}
