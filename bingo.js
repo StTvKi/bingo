@@ -125,7 +125,7 @@ function fitText(square) {
   while (
     (square.scrollHeight > square.clientHeight ||
       square.scrollWidth > square.clientWidth) &&
-    size > 9
+    size > 8
   ) {
     size--;
     square.style.fontSize = size + "px";

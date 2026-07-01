@@ -8,61 +8,59 @@
 </head>
 <body>
   <main class="page">
-    <section class="bingo-card">
+    <img class="header-image" src="header.svg" alt="Norge mot Brasil" />
 
-      <div class="start-screen" id="startScreen">
-        <div class="start-box">
-          <label for="playerNameInput">Skriv inn navnet ditt</label>
-          <input id="playerNameInput" type="text" placeholder="Navn" />
-          <button id="startButton">Start bingo</button>
-        </div>
+    <section class="start-screen" id="startScreen">
+      <div class="start-box">
+        <label for="playerNameInput">Skriv inn navnet ditt</label>
+        <input id="playerNameInput" type="text" placeholder="Navn" />
+        <button id="startButton">Start bingo</button>
       </div>
-
-      <div class="game-screen" id="gameScreen">
-        <div class="player-name" id="playerName"></div>
-
-        <div class="board">
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-          <button></button>
-        </div>
-
-        <div class="full-bingo-message" id="fullBingoMessage">
-          🎉 Gratulerer!!!
-        </div>
-
-        <button class="play-again-button" id="playAgainButton">
-          Spill igjen
-        </button>
-      </div>
-
     </section>
+
+    <section class="game-screen" id="gameScreen">
+      <div class="player-name" id="playerName"></div>
+
+      <div class="board" id="board">
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+      </div>
+    </section>
+
+    <div class="full-bingo-message" id="fullBingoMessage">
+      🎉 Gratulerer!!!
+    </div>
+
+    <button class="play-again-button" id="playAgainButton">
+      Spill igjen
+    </button>
   </main>
 
   <script src="bingo.js"></script>
