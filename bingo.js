@@ -11,19 +11,19 @@ const bingoTexts = [
   "SPILLER TAR AV TRØYEN",
   "TRENER RISTER PÅ HODET",
   "NOEN KLEMMER",
-  "Tekst 13",
-  "Tekst 14",
-  "Tekst 15",
-  "Tekst 16",
-  "Tekst 17",
-  "Tekst 18",
-  "Tekst 19",
-  "Tekst 20",
-  "Tekst 21",
-  "Tekst 22",
-  "Tekst 23",
-  "Tekst 24",
-  "Tekst 25"
+  "VAR-KONTROLL",
+  "BOMMER PÅ STRAFFE",
+  "STANG INN",
+  "TO MÅL FRA SAMME SPILLER",
+  "CORNER",
+  "SKUDD I TVERRLIGGER",
+  "TAKLING",
+  "SPILLER MÅ BÆRES AV BANEN",
+  "TEKNISKE PROBLEMER MED SENDINGEN",
+  "UTSPARK GÅR OVER MIDTBANEN",
+  "SELVMÅL",
+  "SPILLER KRANGLER MED DOMMEREN",
+  "FRISPARK"
 ];
 
 const startScreen = document.getElementById("startScreen");
