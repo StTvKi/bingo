@@ -162,14 +162,52 @@ function showSummary() {
 
   const completedLineCount = completedLines.size;
 
+  // Poeng
   const squarePoints = markedSquares * 10;
   const linePoints = completedLineCount * 100;
   const totalPoints = squarePoints + linePoints;
 
-  summaryTitle.textContent = `${currentPlayerName} sin oppsummering`;
-  summarySquares.textContent = `Markerte ruter: ${markedSquares} × 10 poeng = ${squarePoints}`;
-  summaryLines.textContent = `Bingolinjer: ${completedLineCount} × 100 poeng = ${linePoints}`;
-  summaryScore.textContent = `${totalPoints} poeng`;
+  // Finn tittel
+  let rank = "";
+  let emoji = "";
+
+  if (totalPoints >= 1000) {
+    emoji = "👑";
+    rank = "Bingo-mester";
+  } else if (totalPoints >= 750) {
+    emoji = "🥇";
+    rank = "Gull";
+  } else if (totalPoints >= 500) {
+    emoji = "🥈";
+    rank = "Sølv";
+  } else if (totalPoints >= 250) {
+    emoji = "🥉";
+    rank = "Bronse";
+  } else if (totalPoints >= 100) {
+    emoji = "⚽";
+    rank = "Supporter";
+  } else {
+    emoji = "🌱";
+    rank = "Nybegynner";
+  }
+
+  summaryTitle.textContent = `${currentPlayerName} sin poengsum`;
+
+  summarySquares.textContent =
+    `✅ Markerte ruter: ${markedSquares} (${squarePoints} poeng)`;
+
+  summaryLines.textContent =
+    `🏆 Bingolinjer: ${completedLineCount} (${linePoints} poeng)`;
+
+  summaryScore.innerHTML = `
+    <div style="font-size:3rem;">${emoji}</div>
+    <div style="font-size:2.2rem;font-weight:bold;">
+      ${totalPoints} poeng
+    </div>
+    <div style="font-size:1.4rem;margin-top:10px;">
+      Du er <strong>${rank.toUpperCase()}</strong>!
+    </div>
+  `;
 
   gameScreen.classList.remove("visible");
   fullBingoMessage.classList.remove("visible");
