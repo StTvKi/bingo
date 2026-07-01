@@ -1,0 +1,270 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("./bakgrunn.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bingo-card {
+  width: min(80vw, 680px);
+  transform: translateY(70px);
+  padding-top: 35px;
+}
+
+/* ==========================
+   FORSIDE
+========================== */
+
+.start-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 540px;
+}
+
+.start-screen.hidden {
+  display: none;
+}
+
+.start-box {
+  width: min(90%, 360px);
+  padding: 24px;
+  border: 2px solid #222;
+  border-radius: 16px;
+  background: rgba(255,255,255,.95);
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,.2);
+}
+
+.start-box label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.start-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 2px solid #222;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.start-box button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #222;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.start-box button:hover {
+  transform: scale(1.03);
+}
+
+/* ==========================
+   SPILL
+========================== */
+
+.game-screen {
+  display: none;
+  position: relative;
+}
+
+.game-screen.visible {
+  display: block;
+}
+
+.player-name {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.board button {
+  aspect-ratio: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 8px;
+
+  border: 2px solid #222;
+  border-radius: 10px;
+
+  background: rgba(255,255,255,.92);
+  color: #111;
+
+  font-size: clamp(.65rem,1.2vw,1rem);
+  font-weight: 700;
+
+  text-align: center;
+  line-height: 1.15;
+
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+
+  cursor: pointer;
+
+  transition:
+    background-color .2s,
+    color .2s,
+    transform .15s,
+    box-shadow .15s;
+}
+
+.board button:hover {
+  transform: scale(1.03);
+}
+
+.board button.active {
+  background: #222;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,.35);
+}
+
+/* ==========================
+   FULL BINGO
+========================== */
+
+.full-bingo-message {
+  display: none;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  min-width: 360px;
+
+  padding: 22px 36px;
+
+  background: rgba(255,255,255,.98);
+  border-radius: 18px;
+
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,.35);
+
+  z-index: 9999;
+}
+
+.full-bingo-message.visible {
+  display: block;
+}
+
+.play-again-button {
+  display: none;
+
+  position: fixed;
+  top: calc(50% + 85px);
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  min-width: 190px;
+
+  padding: 14px 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: #2e7d32;
+  color: white;
+
+  font-size: 1.1rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,.35);
+
+  transition: .2s;
+
+  z-index: 10000;
+}
+
+.play-again-button:hover {
+  background: #388e3c;
+  transform: translateX(-50%) scale(1.05);
+}
+
+.play-again-button.visible {
+  display: block;
+}
+
+/* ==========================
+   KONFETTI
+========================== */
+
+.confetti {
+  position: fixed;
+  top: -20px;
+
+  width: 10px;
+  height: 16px;
+
+  pointer-events: none;
+  z-index: 99999;
+
+  animation: fall 2.5s linear forwards;
+}
+
+.confetti:nth-child(3n) {
+  background: #ff3b3b;
+}
+
+.confetti:nth-child(3n+1) {
+  background: #ffd400;
+}
+
+.confetti:nth-child(3n+2) {
+  background: #2f80ff;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
