@@ -28,11 +28,24 @@ const bingoTexts = [
 
 const startScreen = document.getElementById("startScreen");
 const gameScreen = document.getElementById("gameScreen");
+const summaryScreen = document.getElementById("summaryScreen");
+
 const startButton = document.getElementById("startButton");
+const finishButton = document.getElementById("finishButton");
 const playAgainButton = document.getElementById("playAgainButton");
+const backToBoardButton = document.getElementById("backToBoardButton");
+const newGameButton = document.getElementById("newGameButton");
+
 const playerNameInput = document.getElementById("playerNameInput");
 const playerName = document.getElementById("playerName");
+
 const fullBingoMessage = document.getElementById("fullBingoMessage");
+
+const summaryTitle = document.getElementById("summaryTitle");
+const summarySquares = document.getElementById("summarySquares");
+const summaryLines = document.getElementById("summaryLines");
+const summaryScore = document.getElementById("summaryScore");
+
 const board = document.getElementById("board");
 
 const winningLines = [
@@ -64,6 +77,19 @@ playerNameInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     startGame();
   }
+});
+
+finishButton.addEventListener("click", showSummary);
+
+backToBoardButton.addEventListener("click", () => {
+  summaryScreen.classList.remove("visible");
+  gameScreen.classList.add("visible");
+});
+
+newGameButton.addEventListener("click", () => {
+  summaryScreen.classList.remove("visible");
+  gameScreen.classList.add("visible");
+  resetGame();
 });
 
 playAgainButton.addEventListener("click", resetGame);
@@ -102,6 +128,7 @@ function startGame() {
   playerName.textContent = `${name} sitt bingobrett`;
 
   startScreen.classList.add("hidden");
+  summaryScreen.classList.remove("visible");
   gameScreen.classList.add("visible");
 
   resetGame();
@@ -113,6 +140,11 @@ function resetGame() {
   fullBingoMessage.classList.remove("visible");
   playAgainButton.classList.remove("visible");
 
+  const oldLineMessage = document.querySelector(".line-message");
+  if (oldLineMessage) {
+    oldLineMessage.remove();
+  }
+
   const shuffledTexts = shuffleArray([...bingoTexts]);
 
   squares.forEach((square, index) => {
@@ -121,6 +153,28 @@ function resetGame() {
   });
 
   requestAnimationFrame(fitAllText);
+}
+
+function showSummary() {
+  const markedSquares = squares.filter((square) =>
+    square.classList.contains("active")
+  ).length;
+
+  const completedLineCount = completedLines.size;
+
+  const squarePoints = markedSquares * 10;
+  const linePoints = completedLineCount * 100;
+  const totalPoints = squarePoints + linePoints;
+
+  summaryTitle.textContent = `${currentPlayerName} sin oppsummering`;
+  summarySquares.textContent = `Markerte ruter: ${markedSquares} × 10 poeng = ${squarePoints}`;
+  summaryLines.textContent = `Bingolinjer: ${completedLineCount} × 100 poeng = ${linePoints}`;
+  summaryScore.textContent = `${totalPoints} poeng`;
+
+  gameScreen.classList.remove("visible");
+  fullBingoMessage.classList.remove("visible");
+  playAgainButton.classList.remove("visible");
+  summaryScreen.classList.add("visible");
 }
 
 function shuffleArray(array) {
@@ -180,6 +234,7 @@ function checkForBingo() {
 
 function showLineMessage() {
   const oldMessage = document.querySelector(".line-message");
+
   if (oldMessage) {
     oldMessage.remove();
   }
