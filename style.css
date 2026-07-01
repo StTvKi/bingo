@@ -5,8 +5,10 @@
 html,
 body {
   margin: 0;
+  width: 100%;
   min-height: 100%;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 body {
@@ -26,18 +28,20 @@ body {
   flex-direction: column;
   align-items: center;
 
-  padding: clamp(16px, 3vw, 32px);
+  padding: 18px 10px 32px;
 }
 
 .header-image {
-  width: min(90vw, 680px);
+  width: min(94vw, 680px);
   height: auto;
   display: block;
-  margin-bottom: clamp(18px, 4vw, 42px);
+  margin-bottom: 18px;
 }
 
+/* FORSIDE */
+
 .start-screen {
-  width: min(90vw, 420px);
+  width: min(92vw, 420px);
   display: flex;
   justify-content: center;
 }
@@ -84,9 +88,11 @@ body {
   cursor: pointer;
 }
 
+/* SPILL */
+
 .game-screen {
   display: none;
-  width: min(92vw, 680px);
+  width: min(96vw, 680px);
 }
 
 .game-screen.visible {
@@ -95,17 +101,18 @@ body {
 
 .player-name {
   text-align: center;
-  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
   font-weight: bold;
-  margin-bottom: clamp(10px, 2vw, 16px);
+  margin-bottom: 12px;
 }
 
 .board {
   width: 100%;
+  max-width: 100%;
+
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
-  gap: clamp(5px, 1.4vw, 12px);
+  gap: clamp(5px, 1.5vw, 12px);
 }
 
 .board button {
@@ -113,31 +120,30 @@ body {
   aspect-ratio: 1 / 1;
   min-width: 0;
   min-height: 0;
-  overflow: hidden;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   padding: clamp(3px, 1vw, 8px);
 
   border: 2px solid #222;
-  border-radius: clamp(7px, 1.8vw, 12px);
+  border-radius: clamp(8px, 2vw, 12px);
 
   background: rgba(255, 255, 255, 0.92);
   color: #111;
 
-  font-size: clamp(0.45rem, 2.4vw, 1rem);
-  font-weight: 700;
-
-  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
   line-height: 1.05;
+  text-align: center;
 
   white-space: normal;
+  overflow-wrap: anywhere;
   word-break: normal;
-  overflow-wrap: break-word;
   hyphens: auto;
 
+  overflow: hidden;
   cursor: pointer;
 
   transition:
@@ -147,16 +153,14 @@ body {
     box-shadow 0.15s;
 }
 
-.board button:hover {
-  transform: scale(1.03);
-}
-
 .board button.active {
   background: #222;
   color: white;
-  transform: scale(1.04);
+  transform: scale(1.03);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
 }
+
+/* FULL BINGO */
 
 .full-bingo-message {
   display: none;
@@ -164,16 +168,15 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
 
-  min-width: min(86vw, 360px);
+  width: min(86vw, 380px);
   padding: 22px 30px;
 
   background: rgba(255, 255, 255, 0.98);
   border-radius: 18px;
 
-  font-size: clamp(1.6rem, 6vw, 2rem);
+  font-size: clamp(1.5rem, 7vw, 2rem);
   font-weight: bold;
   text-align: center;
 
@@ -190,12 +193,11 @@ body {
   display: none;
 
   position: fixed;
-  top: calc(50% + 85px);
+  top: calc(50% + 86px);
   left: 50%;
-
   transform: translateX(-50%);
 
-  min-width: 190px;
+  min-width: 180px;
   padding: 14px 24px;
 
   border: none;
@@ -208,7 +210,6 @@ body {
   font-weight: bold;
 
   cursor: pointer;
-
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 
   z-index: 10000;
@@ -217,6 +218,8 @@ body {
 .play-again-button.visible {
   display: block;
 }
+
+/* KONFETTI */
 
 .confetti {
   position: fixed;
@@ -250,27 +253,14 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+/* STØRRE SKJERMER */
+
+@media (min-width: 700px) {
   .page {
-    padding: 18px 8px;
+    padding-top: 28px;
   }
 
   .header-image {
-    width: 96vw;
-    margin-bottom: 18px;
-  }
-
-  .game-screen {
-    width: 96vw;
-  }
-
-  .board {
-    gap: 5px;
-  }
-
-  .board button {
-    padding: 3px;
-    font-size: clamp(0.42rem, 2.8vw, 0.75rem);
-    line-height: 1;
+    margin-bottom: 28px;
   }
 }
