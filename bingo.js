@@ -173,7 +173,7 @@ function showSummary() {
 
   if (totalPoints >= 1000) {
     emoji = "👑";
-    rank = "Bingo-mester";
+    rank = "Bingomester";
   } else if (totalPoints >= 750) {
     emoji = "🥇";
     rank = "Gull";
@@ -197,7 +197,7 @@ function showSummary() {
     `✅ Markerte ruter: ${markedSquares} (${squarePoints} poeng)`;
 
   summaryLines.textContent =
-    `🏆 Bingolinjer: ${completedLineCount} (${linePoints} poeng)`;
+    `🏆 Bingo: ${completedLineCount} (${linePoints} poeng)`;
 
   summaryScore.innerHTML = `
     <div style="font-size:3rem;">${emoji}</div>
