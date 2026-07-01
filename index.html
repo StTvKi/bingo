@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bingo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="bingo-card">
+
+      <div class="start-screen" id="startScreen">
+        <div class="start-box">
+          <label for="playerNameInput">Skriv inn navnet ditt</label>
+          <input id="playerNameInput" type="text" placeholder="Navn" />
+          <button id="startButton">Start bingo</button>
+        </div>
+      </div>
+
+      <div class="game-screen" id="gameScreen">
+        <div class="player-name" id="playerName"></div>
+
+        <div class="board">
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+        </div>
+
+        <div class="full-bingo-message" id="fullBingoMessage">
+          🎉 Gratulerer!!!
+        </div>
+
+        <button class="play-again-button" id="playAgainButton">
+          Spill igjen
+        </button>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="bingo.js"></script>
+</body>
+</html>
