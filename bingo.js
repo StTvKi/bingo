@@ -205,7 +205,7 @@ function showSummary() {
       ${totalPoints} poeng
     </div>
     <div style="font-size:1.4rem;margin-top:10px;">
-      Du er <strong>${rank.toUpperCase()}</strong>!
+      Rank: <strong>${rank.toUpperCase()}</strong>!
     </div>
   `;
 
