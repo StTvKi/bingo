@@ -399,3 +399,9 @@ body {
 
   cursor: pointer;
 }
+.board button.bingo-line {
+  border-color: #d4af37;
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.7),
+    0 0 16px rgba(212, 175, 55, 0.8);
+}
