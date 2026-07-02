@@ -13,22 +13,22 @@
                 <g id="_Image847_" serif:id="_Image847" transform="matrix(1,0,0,1,1030.743797,258.208)">
                     <g>
                         <use id="_Image3_" serif:id="_Image3" xlink:href="#_Image3" x="0" y="0" width="569px" height="402px"/>
-                        <g transform="matrix(1.115193,-0,-0,1.097625,-919.057,-186.641)">
-                            <use xlink:href="#_Image4" x="183.94" y="542.631" width="366px" height="95px"/>
+                        <g id="_Image4_" serif:id="_Image4" transform="matrix(1.115193,0,0,1.097625,-701.212532,422.101574)">
+                            <use xlink:href="#_Image4" x="0" y="0" width="366px" height="95px"/>
                         </g>
-                        <g transform="matrix(0.996747,0,0,0.97066,-828.027405,-112.662865)">
-                            <g transform="matrix(108.557036,0,0,108.557036,518.655786,631.009174)">
+                        <g transform="matrix(0.996747,0,0,0.97066,-816.924515,-100.542748)">
+                            <g transform="matrix(1,0,0,1,120.578,631.009)">
+                                <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:108.557px;">NORGE</text>
                             </g>
-                            <text x="120.578px" y="631.009px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:108.557px;">NORGE</text>
                         </g>
-                        <g transform="matrix(1.115193,-0,-0,1.097625,-919.057,-186.641)">
-                            <use xlink:href="#_Image5" x="1549.402" y="542.631" width="358px" height="95px"/>
+                        <g id="_Image5_" serif:id="_Image5" transform="matrix(1.115193,0,0,1.097625,828.264404,422.101574)">
+                            <use xlink:href="#_Image5" x="0" y="0" width="358px" height="95px"/>
                         </g>
                     </g>
-                    <g transform="matrix(0.996747,0,0,0.97066,695.042402,-112.714316)">
-                        <g transform="matrix(108.557036,0,0,108.557036,506.729353,631.009174)">
+                    <g transform="matrix(0.996747,0,0,0.97066,706.840382,-100.542748)">
+                        <g transform="matrix(1,0,0,1,120.578,631.009)">
+                            <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:108.557px;">BRASIL</text>
                         </g>
-                        <text x="120.578px" y="631.009px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:108.557px;">BRASIL</text>
                     </g>
                 </g>
             </g>
