@@ -72,7 +72,7 @@ const winningLines = [
   [4, 9, 14, 19, 24],
 
   [0, 6, 12, 18, 24],
-  [4, 8, 12, 16, 20]
+  [4, 8, 12, 16, 20],
 ];
 
 let squares = [];
@@ -161,13 +161,14 @@ function resetGame() {
   const shuffledTexts = shuffleArray([...bingoTexts]).slice(0, 25);
 
   squares.forEach((square) => {
-    square.classList.remove("active", "generated");
+    square.classList.remove("active", "generated", "bingo-line");
     square.disabled = true;
     square.textContent = "";
   });
 
   animateBoardGeneration(shuffledTexts);
 }
+
 function animateBoardGeneration(finalTexts) {
   const animationTime = 900;
   const intervalTime = 55;
@@ -212,12 +213,10 @@ function showSummary() {
 
   const completedLineCount = completedLines.size;
 
-  // Poeng
   const squarePoints = markedSquares * 10;
   const linePoints = completedLineCount * 100;
   const totalPoints = squarePoints + linePoints;
 
-  // Finn tittel
   let rank = "";
   let emoji = "";
 
@@ -295,6 +294,8 @@ function fitText(square) {
 }
 
 function checkForBingo() {
+  const oldCompletedLineCount = completedLines.size;
+
   completedLines = new Set();
 
   squares.forEach((square) => {
@@ -315,8 +316,9 @@ function checkForBingo() {
     }
   });
 
-  if (completedLines.size > 0) {
+  if (completedLines.size > oldCompletedLineCount) {
     showLineMessage();
+    launchConfetti();
   }
 
   if (completedLines.size === winningLines.length) {
