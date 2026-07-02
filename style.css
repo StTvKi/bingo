@@ -38,8 +38,6 @@ body {
   margin-bottom: 18px;
 }
 
-/* FORSIDE */
-
 .start-screen {
   width: min(92vw, 420px);
   display: flex;
@@ -119,8 +117,6 @@ body {
   cursor: not-allowed;
 }
 
-/* SPILL */
-
 .game-screen {
   display: none;
   width: min(96vw, 680px);
@@ -191,8 +187,6 @@ body {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
 }
 
-/* FULL BINGO */
-
 .full-bingo-message {
   display: none;
 
@@ -250,8 +244,6 @@ body {
   display: block;
 }
 
-/* KONFETTI */
-
 .confetti {
   position: fixed;
   top: -20px;
@@ -283,8 +275,6 @@ body {
     opacity: 0;
   }
 }
-
-/* STØRRE SKJERMER */
 
 @media (min-width: 700px) {
   .page {
