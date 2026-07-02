@@ -295,21 +295,29 @@ function fitText(square) {
 }
 
 function checkForBingo() {
+  completedLines = new Set();
+
+  squares.forEach((square) => {
+    square.classList.remove("bingo-line");
+  });
+
   winningLines.forEach((line, lineIndex) => {
     const hasLine = line.every((index) =>
       squares[index].classList.contains("active")
     );
 
-    if (hasLine && !completedLines.has(lineIndex)) {
+    if (hasLine) {
       completedLines.add(lineIndex);
-      showLineMessage();
-      launchConfetti();
-    }
 
-    if (!hasLine && completedLines.has(lineIndex)) {
-      completedLines.delete(lineIndex);
+      line.forEach((index) => {
+        squares[index].classList.add("bingo-line");
+      });
     }
   });
+
+  if (completedLines.size > 0) {
+    showLineMessage();
+  }
 
   if (completedLines.size === winningLines.length) {
     fullBingoMessage.textContent = `🎉 Gratulerer ${currentPlayerName}!!!`;
