@@ -16,7 +16,7 @@
                 </g>
             </g>
         </g>
-        <path d="M785,201.5L785,464L315.833,464C264.045,464 222,424.793 222,376.5L222,114L691.167,114C742.955,114 785,153.207 785,201.5Z" style="fill:none;stroke:rgb(255,240,240);stroke-width:9.8px;"/>
+        <path d="M785,201.5L785,464L315.833,464C264.045,464 222,424.793 222,376.5L222,114L691.167,114C742.955,114 785,153.207 785,201.5Z" style="fill:none;stroke:rgb(255,240,240);stroke-width:14.7px;"/>
     </g>
     <g id="V1" transform="matrix(0.896706,0,0,0.911058,-31.982813,-65.201688)">
         <g transform="matrix(1.097365,0,0,1.158256,1345.515318,64.655099)">
@@ -41,14 +41,14 @@
                     </g>
                 </g>
             </g>
-            <path d="M785,201.5L785,464L315.833,464C264.045,464 222,424.793 222,376.5L222,114L691.167,114C742.955,114 785,153.207 785,201.5Z" style="fill:none;stroke:rgb(255,240,240);stroke-width:9.8px;"/>
+            <path d="M785,201.5L785,464L315.833,464C264.045,464 222,424.793 222,376.5L222,114L691.167,114C742.955,114 785,153.207 785,201.5Z" style="fill:none;stroke:rgb(255,240,240);stroke-width:14.7px;"/>
         </g>
-        <g transform="matrix(0.874601,0,0,0.860823,144.263802,208.611382)">
+        <g transform="matrix(0.874601,0,0,0.860823,144.263802,226.173382)">
             <g transform="matrix(123.781384,0,0,123.781384,766.856501,577)">
             </g>
             <text x="251px" y="577px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:123.781px;">CANADA</text>
         </g>
-        <g transform="matrix(0.874601,0,0,0.860823,1419.185537,208.611382)">
+        <g transform="matrix(0.874601,0,0,0.860823,1419.185537,226.22541)">
             <g transform="matrix(123.781384,0,0,123.781384,883.747711,577)">
             </g>
             <text x="251px" y="577px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:123.781px;">MAROKKO</text>
@@ -56,7 +56,7 @@
         <g transform="matrix(0.603933,0,0,0.594419,591.366982,365.703317)">
             <g transform="matrix(382.515308,0,0,382.515308,1328.269445,393)">
             </g>
-            <text x="818px" y="393px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:382.515px;stroke:white;stroke-width:14.77px;stroke-linecap:butt;stroke-miterlimit:2;">VS</text>
+            <text x="818px" y="393px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:382.515px;">VS</text>
         </g>
     </g>
 </svg>
