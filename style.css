@@ -395,3 +395,121 @@ body {
     0 0 0 3px rgba(212, 175, 55, 0.7),
     0 0 16px rgba(212, 175, 55, 0.8);
 }
+#summaryMatch,
+#summaryPrediction {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+.prediction-inputs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.prediction-inputs span {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.prediction-inputs input {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+#summaryMatch,
+#summaryPrediction {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+.prediction-inputs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.prediction-inputs span {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.prediction-inputs input {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.actual-score-box {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+.actual-score-box label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+#summaryMatch,
+#summaryPrediction,
+#summaryActualResult,
+#summaryPredictionPoints {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+.score-counter {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.team-score {
+  min-width: 0;
+}
+
+.team-name {
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  overflow-wrap: break-word;
+}
+
+.score-controls {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  gap: 6px;
+  align-items: center;
+}
+
+.score-controls button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: #222;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.score-controls span {
+  min-width: 28px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.score-divider {
+  padding-top: 22px;
+  font-size: 1.4rem;
+  font-weight: bold;
+}

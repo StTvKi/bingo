@@ -1,3 +1,10 @@
+const MATCH = {
+  homeTeam: "Norge",
+  awayTeam: "Brasil",
+};
+
+const STORAGE_KEY = "footballBingoGame";
+
 const bingoTexts = [
   "SKUDD I TVERRLIGGER",
   "NOEN GRINER",
@@ -53,16 +60,43 @@ const backToBoardButton = document.getElementById("backToBoardButton");
 const newGameButton = document.getElementById("newGameButton");
 
 const playerNameInput = document.getElementById("playerNameInput");
+
+const homeScoreInput = document.getElementById("homeScoreInput");
+const awayScoreInput = document.getElementById("awayScoreInput");
+
+const actualHomeTeamName = document.getElementById("actualHomeTeamName");
+const actualAwayTeamName = document.getElementById("actualAwayTeamName");
+
+const actualHomeMinusButton = document.getElementById("actualHomeMinusButton");
+const actualHomePlusButton = document.getElementById("actualHomePlusButton");
+const actualAwayMinusButton = document.getElementById("actualAwayMinusButton");
+const actualAwayPlusButton = document.getElementById("actualAwayPlusButton");
+
+const actualHomeScoreDisplay = document.getElementById("actualHomeScoreDisplay");
+const actualAwayScoreDisplay = document.getElementById("actualAwayScoreDisplay");
+
 const playerName = document.getElementById("playerName");
 
 const fullBingoMessage = document.getElementById("fullBingoMessage");
 
 const summaryTitle = document.getElementById("summaryTitle");
+const summaryMatch = document.getElementById("summaryMatch");
+const summaryPrediction = document.getElementById("summaryPrediction");
+const summaryActualResult = document.getElementById("summaryActualResult");
+const summaryPredictionPoints = document.getElementById("summaryPredictionPoints");
 const summarySquares = document.getElementById("summarySquares");
 const summaryLines = document.getElementById("summaryLines");
 const summaryScore = document.getElementById("summaryScore");
 
 const board = document.getElementById("board");
+
+homeScoreInput.placeholder = MATCH.homeTeam;
+awayScoreInput.placeholder = MATCH.awayTeam;
+
+actualHomeTeamName.textContent = MATCH.homeTeam;
+actualAwayTeamName.textContent = MATCH.awayTeam;
+
+document.title = `Bingo - ${MATCH.homeTeam} mot ${MATCH.awayTeam}`;
 
 const winningLines = [
   [0, 1, 2, 3, 4],
@@ -84,15 +118,48 @@ const winningLines = [
 let squares = [];
 let completedLines = new Set();
 let currentPlayerName = "";
+let currentPrediction = "";
+let actualHomeScore = 0;
+let actualAwayScore = 0;
+let isRestoringSavedGame = false;
 
 createBoard();
+loadSavedGame();
 
 startButton.addEventListener("click", startGame);
 
 playerNameInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
+    homeScoreInput.focus();
+  }
+});
+
+homeScoreInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    awayScoreInput.focus();
+  }
+});
+
+awayScoreInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
     startGame();
   }
+});
+
+actualHomeMinusButton.addEventListener("click", () => {
+  changeActualScore("home", -1);
+});
+
+actualHomePlusButton.addEventListener("click", () => {
+  changeActualScore("home", 1);
+});
+
+actualAwayMinusButton.addEventListener("click", () => {
+  changeActualScore("away", -1);
+});
+
+actualAwayPlusButton.addEventListener("click", () => {
+  changeActualScore("away", 1);
 });
 
 finishButton.addEventListener("click", showSummary);
@@ -100,18 +167,61 @@ finishButton.addEventListener("click", showSummary);
 backToBoardButton.addEventListener("click", () => {
   summaryScreen.classList.remove("visible");
   gameScreen.classList.add("visible");
+  saveGame();
 });
 
 newGameButton.addEventListener("click", () => {
+  clearSavedGame();
+
   summaryScreen.classList.remove("visible");
-  gameScreen.classList.add("visible");
-  resetGame();
+  gameScreen.classList.remove("visible");
+  startScreen.classList.remove("hidden");
+
+  playerNameInput.value = "";
+  homeScoreInput.value = "";
+  awayScoreInput.value = "";
+
+  currentPlayerName = "";
+  currentPrediction = "";
+  actualHomeScore = 0;
+  actualAwayScore = 0;
+
+  updateActualScoreDisplay();
+  resetGame(false);
 });
 
-playAgainButton.addEventListener("click", resetGame);
+playAgainButton.addEventListener("click", () => {
+  clearSavedGame();
+
+  startScreen.classList.remove("hidden");
+  gameScreen.classList.remove("visible");
+  summaryScreen.classList.remove("visible");
+
+  playerNameInput.value = "";
+  homeScoreInput.value = "";
+  awayScoreInput.value = "";
+
+  currentPlayerName = "";
+  currentPrediction = "";
+  actualHomeScore = 0;
+  actualAwayScore = 0;
+
+  updateActualScoreDisplay();
+  resetGame(false);
+});
 
 window.addEventListener("resize", () => {
   fitAllText();
+});
+
+window.addEventListener("beforeunload", () => {
+  saveGame();
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    saveGame();
+  }
 });
 
 function createBoard() {
@@ -125,6 +235,7 @@ function createBoard() {
     square.addEventListener("click", () => {
       square.classList.toggle("active");
       checkForBingo();
+      saveGame();
     });
 
     board.appendChild(square);
@@ -134,23 +245,41 @@ function createBoard() {
 
 function startGame() {
   const name = playerNameInput.value.trim();
+  const homeScore = homeScoreInput.value.trim();
+  const awayScore = awayScoreInput.value.trim();
 
   if (name === "") {
     playerNameInput.focus();
     return;
   }
 
+  if (homeScore === "") {
+    homeScoreInput.focus();
+    return;
+  }
+
+  if (awayScore === "") {
+    awayScoreInput.focus();
+    return;
+  }
+
   currentPlayerName = name;
+  currentPrediction = `${homeScore}-${awayScore}`;
+
+  actualHomeScore = 0;
+  actualAwayScore = 0;
+  updateActualScoreDisplay();
+
   playerName.textContent = `${name} sitt bingobrett`;
 
   startScreen.classList.add("hidden");
   summaryScreen.classList.remove("visible");
   gameScreen.classList.add("visible");
 
-  resetGame();
+  resetGame(true);
 }
 
-function resetGame() {
+function resetGame(shouldGenerateNewBoard = true) {
   completedLines = new Set();
 
   fullBingoMessage.classList.remove("visible");
@@ -161,16 +290,21 @@ function resetGame() {
     oldLineMessage.remove();
   }
 
+  squares.forEach((square) => {
+    square.classList.remove("active", "generated", "bingo-line");
+    square.disabled = false;
+    square.textContent = "";
+  });
+
+  if (!shouldGenerateNewBoard) {
+    saveGame();
+    return;
+  }
+
   board.classList.add("generating");
   finishButton.disabled = true;
 
   const shuffledTexts = shuffleArray([...bingoTexts]).slice(0, 25);
-
-  squares.forEach((square) => {
-    square.classList.remove("active", "generated", "bingo-line");
-    square.disabled = true;
-    square.textContent = "";
-  });
 
   animateBoardGeneration(shuffledTexts);
 }
@@ -209,10 +343,37 @@ function animateBoardGeneration(finalTexts) {
     board.classList.remove("generating");
     finishButton.disabled = false;
     requestAnimationFrame(fitAllText);
+    saveGame();
   }, totalTime);
 }
 
+function changeActualScore(team, change) {
+  const isGoalAdded = change > 0;
+
+  if (team === "home") {
+    actualHomeScore = Math.max(0, actualHomeScore + change);
+  }
+
+  if (team === "away") {
+    actualAwayScore = Math.max(0, actualAwayScore + change);
+  }
+
+  updateActualScoreDisplay();
+  saveGame();
+
+  if (isGoalAdded) {
+    launchConfetti();
+  }
+}
+
+function updateActualScoreDisplay() {
+  actualHomeScoreDisplay.textContent = actualHomeScore;
+  actualAwayScoreDisplay.textContent = actualAwayScore;
+}
+
 function showSummary() {
+  saveGame();
+
   const markedSquares = squares.filter((square) =>
     square.classList.contains("active")
   ).length;
@@ -221,7 +382,9 @@ function showSummary() {
 
   const squarePoints = markedSquares * 10;
   const linePoints = completedLineCount * 100;
-  const totalPoints = squarePoints + linePoints;
+  const predictionPoints = calculatePredictionPoints();
+
+  const totalPoints = squarePoints + linePoints + predictionPoints;
 
   let rank = "";
   let emoji = "";
@@ -248,6 +411,18 @@ function showSummary() {
 
   summaryTitle.textContent = `${currentPlayerName} sin poengsum`;
 
+  summaryMatch.textContent =
+    `Kamp: ${MATCH.homeTeam} mot ${MATCH.awayTeam}`;
+
+  summaryPrediction.textContent =
+    `⚽ Tippet resultat: ${MATCH.homeTeam} ${currentPrediction} ${MATCH.awayTeam}`;
+
+  summaryActualResult.textContent =
+    `📍 Faktisk resultat: ${getActualResultText()}`;
+
+  summaryPredictionPoints.textContent =
+    `🎯 Resultatbonus: ${predictionPoints} poeng`;
+
   summarySquares.textContent =
     `✅ Markerte ruter: ${markedSquares} (${squarePoints} poeng)`;
 
@@ -268,6 +443,152 @@ function showSummary() {
   fullBingoMessage.classList.remove("visible");
   playAgainButton.classList.remove("visible");
   summaryScreen.classList.add("visible");
+}
+
+function calculatePredictionPoints() {
+  const [predictedHome, predictedAway] = currentPrediction
+    .split("-")
+    .map(Number);
+
+  let points = 0;
+
+  const predictedWinner = getWinner(predictedHome, predictedAway);
+  const actualWinner = getWinner(actualHomeScore, actualAwayScore);
+
+  if (predictedWinner === actualWinner) {
+    points += 100;
+  }
+
+  if (predictedHome === actualHomeScore) {
+    points += 50;
+  }
+
+  if (predictedAway === actualAwayScore) {
+    points += 50;
+  }
+
+  if (predictedHome === actualHomeScore && predictedAway === actualAwayScore) {
+    points += 100;
+  }
+
+  return points;
+}
+
+function getWinner(homeScore, awayScore) {
+  if (homeScore > awayScore) {
+    return "home";
+  }
+
+  if (awayScore > homeScore) {
+    return "away";
+  }
+
+  return "draw";
+}
+
+function getActualResultText() {
+  return `${MATCH.homeTeam} ${actualHomeScore}-${actualAwayScore} ${MATCH.awayTeam}`;
+}
+
+function saveGame() {
+  if (isRestoringSavedGame) {
+    return;
+  }
+
+  const gameIsStarted =
+    currentPlayerName !== "" &&
+    currentPrediction !== "" &&
+    gameScreen.classList.contains("visible");
+
+  const summaryIsVisible = summaryScreen.classList.contains("visible");
+
+  if (!gameIsStarted && !summaryIsVisible) {
+    return;
+  }
+
+  const savedGame = {
+    match: MATCH,
+    playerName: currentPlayerName,
+    prediction: currentPrediction,
+    actualHomeScore,
+    actualAwayScore,
+    squareTexts: squares.map((square) => square.textContent),
+    activeSquares: squares.map((square) => square.classList.contains("active")),
+    screen: summaryIsVisible ? "summary" : "game",
+  };
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(savedGame));
+}
+
+function loadSavedGame() {
+  const savedGameText = localStorage.getItem(STORAGE_KEY);
+
+  if (!savedGameText) {
+    return;
+  }
+
+  try {
+    const savedGame = JSON.parse(savedGameText);
+
+    if (!savedGame || !savedGame.playerName || !savedGame.prediction) {
+      clearSavedGame();
+      return;
+    }
+
+    isRestoringSavedGame = true;
+
+    currentPlayerName = savedGame.playerName;
+    currentPrediction = savedGame.prediction;
+    actualHomeScore = Number(savedGame.actualHomeScore || 0);
+    actualAwayScore = Number(savedGame.actualAwayScore || 0);
+
+    playerNameInput.value = currentPlayerName;
+
+    const [predictedHome, predictedAway] = currentPrediction.split("-");
+    homeScoreInput.value = predictedHome || "";
+    awayScoreInput.value = predictedAway || "";
+
+    playerName.textContent = `${currentPlayerName} sitt bingobrett`;
+    updateActualScoreDisplay();
+
+    startScreen.classList.add("hidden");
+    gameScreen.classList.add("visible");
+    summaryScreen.classList.remove("visible");
+
+    if (Array.isArray(savedGame.squareTexts) && savedGame.squareTexts.length === 25) {
+      squares.forEach((square, index) => {
+        square.textContent = savedGame.squareTexts[index] || "";
+        square.disabled = false;
+        square.classList.add("generated");
+
+        if (savedGame.activeSquares && savedGame.activeSquares[index]) {
+          square.classList.add("active");
+        } else {
+          square.classList.remove("active");
+        }
+
+        fitText(square);
+      });
+    }
+
+    board.classList.remove("generating");
+    finishButton.disabled = false;
+
+    checkForBingo();
+
+    if (savedGame.screen === "summary") {
+      showSummary();
+    }
+
+    isRestoringSavedGame = false;
+  } catch (error) {
+    isRestoringSavedGame = false;
+    clearSavedGame();
+  }
+}
+
+function clearSavedGame() {
+  localStorage.removeItem(STORAGE_KEY);
 }
 
 function shuffleArray(array) {

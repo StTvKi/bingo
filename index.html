@@ -8,12 +8,21 @@
 </head>
 <body>
   <main class="page">
-    <img class="header-image" src="header.svg" alt="Norge mot Brasil" />
+    <img class="header-image" src="header.svg" alt="Kampheader" />
 
     <section class="start-screen" id="startScreen">
       <div class="start-box">
         <label for="playerNameInput">Skriv inn navnet ditt</label>
         <input id="playerNameInput" type="text" placeholder="Navn" />
+
+        <label>Hva tipper du resultatet blir?</label>
+
+        <div class="prediction-inputs">
+          <input id="homeScoreInput" type="number" min="0" placeholder="Hjemmelag" />
+          <span>-</span>
+          <input id="awayScoreInput" type="number" min="0" placeholder="Bortelag" />
+        </div>
+
         <button id="startButton">Lag mitt bingobrett</button>
       </div>
     </section>
@@ -23,6 +32,32 @@
 
       <div class="board" id="board"></div>
 
+      <div class="actual-score-box">
+        <label>Faktisk stilling nå</label>
+
+        <div class="score-counter">
+          <div class="team-score">
+            <div class="team-name" id="actualHomeTeamName"></div>
+            <div class="score-controls">
+              <button type="button" id="actualHomeMinusButton">−</button>
+              <span id="actualHomeScoreDisplay">0</span>
+              <button type="button" id="actualHomePlusButton">+</button>
+            </div>
+          </div>
+
+          <div class="score-divider">-</div>
+
+          <div class="team-score">
+            <div class="team-name" id="actualAwayTeamName"></div>
+            <div class="score-controls">
+              <button type="button" id="actualAwayMinusButton">−</button>
+              <span id="actualAwayScoreDisplay">0</span>
+              <button type="button" id="actualAwayPlusButton">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <button class="finish-button" id="finishButton">
         Ferdig
       </button>
@@ -31,6 +66,10 @@
     <section class="summary-screen" id="summaryScreen">
       <div class="summary-box">
         <h1 id="summaryTitle"></h1>
+        <p id="summaryMatch"></p>
+        <p id="summaryPrediction"></p>
+        <p id="summaryActualResult"></p>
+        <p id="summaryPredictionPoints"></p>
         <p id="summarySquares"></p>
         <p id="summaryLines"></p>
         <p class="summary-score" id="summaryScore"></p>
