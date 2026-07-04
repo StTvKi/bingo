@@ -34,6 +34,12 @@ const bingoTexts = [
   "SPILLER FÅR KRAMPE",
   "KOMMENTATOR SIER 'FANTASTISK'",
   "INNKAST",
+  "SPILLER SKLIR PÅ KNÆRNE",
+  "PUBLIKUM 'ROR'",
+  "KEEPERBYTTE",
+  "KOMMENTATOR LER",
+  "NOE BLIR KASTET INN PÅ BANEN",
+  "PUBLIKUM SYNGER",
 ];
 
 const startScreen = document.getElementById("startScreen");
