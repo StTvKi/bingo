@@ -30,6 +30,11 @@
     <section class="game-screen" id="gameScreen">
       <div class="player-name" id="playerName"></div>
 
+      <div class="live-score-box">
+        <span>Score:</span>
+        <strong id="liveScoreDisplay">0 poeng</strong>
+      </div>
+
       <div class="board" id="board"></div>
 
       <div class="actual-score-box">
@@ -59,7 +64,7 @@
       </div>
 
       <button class="finish-button" id="finishButton">
-        Ferdig
+        Se oppsummering og poeng
       </button>
     </section>
 
@@ -69,7 +74,16 @@
         <p id="summaryMatch"></p>
         <p id="summaryPrediction"></p>
         <p id="summaryActualResult"></p>
-        <p id="summaryPredictionPoints"></p>
+
+        <div class="summary-section">
+          <h2>Resultatbonus</h2>
+          <p id="summaryWinnerPoints"></p>
+          <p id="summaryHomeGoalPoints"></p>
+          <p id="summaryAwayGoalPoints"></p>
+          <p id="summaryExactScorePoints"></p>
+          <p id="summaryPredictionPoints"></p>
+        </div>
+
         <p id="summarySquares"></p>
         <p id="summaryLines"></p>
         <p class="summary-score" id="summaryScore"></p>
@@ -78,14 +92,6 @@
         <button id="newGameButton">Nytt brett</button>
       </div>
     </section>
-
-    <div class="full-bingo-message" id="fullBingoMessage">
-      🎉 Gratulerer!!!
-    </div>
-
-    <button class="play-again-button" id="playAgainButton">
-      Spill igjen
-    </button>
   </main>
 
   <script src="bingo.js"></script>
