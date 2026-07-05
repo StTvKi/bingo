@@ -5,6 +5,15 @@ const MATCH = {
 
 const STORAGE_KEY = "footballBingoGame";
 
+const POINTS = {
+  square: 10,
+  line: 100,
+  correctWinner: 100,
+  correctHomeGoals: 50,
+  correctAwayGoals: 50,
+  exactScoreBonus: 100,
+};
+
 const bingoTexts = [
   "SKUDD I TVERRLIGGER",
   "NOEN GRINER",
@@ -55,12 +64,10 @@ const summaryScreen = document.getElementById("summaryScreen");
 
 const startButton = document.getElementById("startButton");
 const finishButton = document.getElementById("finishButton");
-const playAgainButton = document.getElementById("playAgainButton");
 const backToBoardButton = document.getElementById("backToBoardButton");
 const newGameButton = document.getElementById("newGameButton");
 
 const playerNameInput = document.getElementById("playerNameInput");
-
 const homeScoreInput = document.getElementById("homeScoreInput");
 const awayScoreInput = document.getElementById("awayScoreInput");
 
@@ -76,14 +83,19 @@ const actualHomeScoreDisplay = document.getElementById("actualHomeScoreDisplay")
 const actualAwayScoreDisplay = document.getElementById("actualAwayScoreDisplay");
 
 const playerName = document.getElementById("playerName");
-
-const fullBingoMessage = document.getElementById("fullBingoMessage");
+const liveScoreDisplay = document.getElementById("liveScoreDisplay");
 
 const summaryTitle = document.getElementById("summaryTitle");
 const summaryMatch = document.getElementById("summaryMatch");
 const summaryPrediction = document.getElementById("summaryPrediction");
 const summaryActualResult = document.getElementById("summaryActualResult");
+
+const summaryWinnerPoints = document.getElementById("summaryWinnerPoints");
+const summaryHomeGoalPoints = document.getElementById("summaryHomeGoalPoints");
+const summaryAwayGoalPoints = document.getElementById("summaryAwayGoalPoints");
+const summaryExactScorePoints = document.getElementById("summaryExactScorePoints");
 const summaryPredictionPoints = document.getElementById("summaryPredictionPoints");
+
 const summarySquares = document.getElementById("summarySquares");
 const summaryLines = document.getElementById("summaryLines");
 const summaryScore = document.getElementById("summaryScore");
@@ -125,6 +137,7 @@ let isRestoringSavedGame = false;
 
 createBoard();
 loadSavedGame();
+updateLiveScore();
 
 startButton.addEventListener("click", startGame);
 
@@ -167,6 +180,7 @@ finishButton.addEventListener("click", showSummary);
 backToBoardButton.addEventListener("click", () => {
   summaryScreen.classList.remove("visible");
   gameScreen.classList.add("visible");
+  updateLiveScore();
   saveGame();
 });
 
@@ -188,26 +202,7 @@ newGameButton.addEventListener("click", () => {
 
   updateActualScoreDisplay();
   resetGame(false);
-});
-
-playAgainButton.addEventListener("click", () => {
-  clearSavedGame();
-
-  startScreen.classList.remove("hidden");
-  gameScreen.classList.remove("visible");
-  summaryScreen.classList.remove("visible");
-
-  playerNameInput.value = "";
-  homeScoreInput.value = "";
-  awayScoreInput.value = "";
-
-  currentPlayerName = "";
-  currentPrediction = "";
-  actualHomeScore = 0;
-  actualAwayScore = 0;
-
-  updateActualScoreDisplay();
-  resetGame(false);
+  updateLiveScore();
 });
 
 window.addEventListener("resize", () => {
@@ -235,6 +230,7 @@ function createBoard() {
     square.addEventListener("click", () => {
       square.classList.toggle("active");
       checkForBingo();
+      updateLiveScore();
       saveGame();
     });
 
@@ -277,24 +273,19 @@ function startGame() {
   gameScreen.classList.add("visible");
 
   resetGame(true);
+  updateLiveScore();
 }
 
 function resetGame(shouldGenerateNewBoard = true) {
   completedLines = new Set();
-
-  fullBingoMessage.classList.remove("visible");
-  playAgainButton.classList.remove("visible");
-
-  const oldLineMessage = document.querySelector(".line-message");
-  if (oldLineMessage) {
-    oldLineMessage.remove();
-  }
 
   squares.forEach((square) => {
     square.classList.remove("active", "generated", "bingo-line");
     square.disabled = false;
     square.textContent = "";
   });
+
+  updateLiveScore();
 
   if (!shouldGenerateNewBoard) {
     saveGame();
@@ -343,6 +334,7 @@ function animateBoardGeneration(finalTexts) {
     board.classList.remove("generating");
     finishButton.disabled = false;
     requestAnimationFrame(fitAllText);
+    updateLiveScore();
     saveGame();
   }, totalTime);
 }
@@ -359,6 +351,7 @@ function changeActualScore(team, change) {
   }
 
   updateActualScoreDisplay();
+  updateLiveScore();
   saveGame();
 
   if (isGoalAdded) {
@@ -374,34 +367,25 @@ function updateActualScoreDisplay() {
 function showSummary() {
   saveGame();
 
-  const markedSquares = squares.filter((square) =>
-    square.classList.contains("active")
-  ).length;
-
-  const completedLineCount = completedLines.size;
-
-  const squarePoints = markedSquares * 10;
-  const linePoints = completedLineCount * 100;
-  const predictionPoints = calculatePredictionPoints();
-
-  const totalPoints = squarePoints + linePoints + predictionPoints;
+  const scoreData = calculateScoreData();
+  const predictionBreakdown = calculatePredictionBreakdown();
 
   let rank = "";
   let emoji = "";
 
-  if (totalPoints >= 1000) {
+  if (scoreData.totalPoints >= 1000) {
     emoji = "👑";
     rank = "Bingomester";
-  } else if (totalPoints >= 750) {
+  } else if (scoreData.totalPoints >= 750) {
     emoji = "🥇";
     rank = "Gull";
-  } else if (totalPoints >= 500) {
+  } else if (scoreData.totalPoints >= 500) {
     emoji = "🥈";
     rank = "Sølv";
-  } else if (totalPoints >= 250) {
+  } else if (scoreData.totalPoints >= 250) {
     emoji = "🥉";
     rank = "Bronse";
-  } else if (totalPoints >= 100) {
+  } else if (scoreData.totalPoints >= 100) {
     emoji = "⚽";
     rank = "Supporter";
   } else {
@@ -420,58 +404,112 @@ function showSummary() {
   summaryActualResult.textContent =
     `📍 Faktisk resultat: ${getActualResultText()}`;
 
+  summaryWinnerPoints.textContent =
+    `Riktig vinner/uavgjort: ${predictionBreakdown.correctWinner ? POINTS.correctWinner : 0} poeng`;
+
+  summaryHomeGoalPoints.textContent =
+    `Riktig antall mål for ${MATCH.homeTeam}: ${predictionBreakdown.correctHomeGoals ? POINTS.correctHomeGoals : 0} poeng`;
+
+  summaryAwayGoalPoints.textContent =
+    `Riktig antall mål for ${MATCH.awayTeam}: ${predictionBreakdown.correctAwayGoals ? POINTS.correctAwayGoals : 0} poeng`;
+
+  summaryExactScorePoints.textContent =
+    `Ekstra bonus for helt riktig resultat: ${predictionBreakdown.exactScore ? POINTS.exactScoreBonus : 0} poeng`;
+
   summaryPredictionPoints.textContent =
-    `🎯 Resultatbonus: ${predictionPoints} poeng`;
+    `🎯 Resultatbonus totalt: ${scoreData.predictionPoints} poeng`;
 
   summarySquares.textContent =
-    `✅ Markerte ruter: ${markedSquares} (${squarePoints} poeng)`;
+    `✅ Markerte ruter: ${scoreData.markedSquares} (${scoreData.squarePoints} poeng)`;
 
   summaryLines.textContent =
-    `🏆 Bingo: ${completedLineCount} (${linePoints} poeng)`;
+    `🏆 Bingo: ${scoreData.completedLineCount} (${scoreData.linePoints} poeng)`;
 
   summaryScore.innerHTML = `
     <div style="font-size:3rem;">${emoji}</div>
     <div style="font-size:2.2rem;font-weight:bold;">
-      ${totalPoints} poeng
+      ${scoreData.totalPoints} poeng
     </div>
     <div style="font-size:1.4rem;margin-top:10px;">
-       <strong>${rank.toUpperCase()}</strong>!
+      <strong>${rank.toUpperCase()}</strong>!
     </div>
   `;
 
   gameScreen.classList.remove("visible");
-  fullBingoMessage.classList.remove("visible");
-  playAgainButton.classList.remove("visible");
   summaryScreen.classList.add("visible");
 }
 
+function calculateScoreData() {
+  const markedSquares = squares.filter((square) =>
+    square.classList.contains("active")
+  ).length;
+
+  const completedLineCount = completedLines.size;
+
+  const squarePoints = markedSquares * POINTS.square;
+  const linePoints = completedLineCount * POINTS.line;
+  const predictionPoints = calculatePredictionPoints();
+
+  const totalPoints = squarePoints + linePoints + predictionPoints;
+
+  return {
+    markedSquares,
+    completedLineCount,
+    squarePoints,
+    linePoints,
+    predictionPoints,
+    totalPoints,
+  };
+}
+
+function updateLiveScore() {
+  const scoreData = calculateScoreData();
+  liveScoreDisplay.textContent = `${scoreData.totalPoints} poeng`;
+}
+
 function calculatePredictionPoints() {
+  const breakdown = calculatePredictionBreakdown();
+
+  let points = 0;
+
+  if (breakdown.correctWinner) {
+    points += POINTS.correctWinner;
+  }
+
+  if (breakdown.correctHomeGoals) {
+    points += POINTS.correctHomeGoals;
+  }
+
+  if (breakdown.correctAwayGoals) {
+    points += POINTS.correctAwayGoals;
+  }
+
+  if (breakdown.exactScore) {
+    points += POINTS.exactScoreBonus;
+  }
+
+  return points;
+}
+
+function calculatePredictionBreakdown() {
   const [predictedHome, predictedAway] = currentPrediction
     .split("-")
     .map(Number);
 
-  let points = 0;
-
   const predictedWinner = getWinner(predictedHome, predictedAway);
   const actualWinner = getWinner(actualHomeScore, actualAwayScore);
 
-  if (predictedWinner === actualWinner) {
-    points += 100;
-  }
+  const correctWinner = predictedWinner === actualWinner;
+  const correctHomeGoals = predictedHome === actualHomeScore;
+  const correctAwayGoals = predictedAway === actualAwayScore;
+  const exactScore = correctHomeGoals && correctAwayGoals;
 
-  if (predictedHome === actualHomeScore) {
-    points += 50;
-  }
-
-  if (predictedAway === actualAwayScore) {
-    points += 50;
-  }
-
-  if (predictedHome === actualHomeScore && predictedAway === actualAwayScore) {
-    points += 100;
-  }
-
-  return points;
+  return {
+    correctWinner,
+    correctHomeGoals,
+    correctAwayGoals,
+    exactScore,
+  };
 }
 
 function getWinner(homeScore, awayScore) {
@@ -575,6 +613,7 @@ function loadSavedGame() {
     finishButton.disabled = false;
 
     checkForBingo();
+    updateLiveScore();
 
     if (savedGame.screen === "summary") {
       showSummary();
@@ -644,41 +683,14 @@ function checkForBingo() {
   });
 
   if (completedLines.size > oldCompletedLineCount) {
-    showLineMessage();
     launchConfetti();
   }
 
-  if (completedLines.size === winningLines.length) {
-    fullBingoMessage.textContent = `🎉 Gratulerer ${currentPlayerName}!!!`;
-    fullBingoMessage.classList.add("visible");
-    playAgainButton.classList.add("visible");
-    launchConfetti();
-    launchConfetti();
-  }
-}
-
-function showLineMessage() {
-  const oldMessage = document.querySelector(".line-message");
-
-  if (oldMessage) {
-    oldMessage.remove();
-  }
-
-  const message = document.createElement("div");
-  message.className = "line-message";
-
-  const count = completedLines.size;
-  message.textContent = `🎉 Bingo! ${count} av 12 linjer`;
-
-  document.body.appendChild(message);
-
-  setTimeout(() => {
-    message.remove();
-  }, 1800);
+  updateLiveScore();
 }
 
 function launchConfetti() {
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 40; i++) {
     const confetti = document.createElement("div");
     confetti.className = "confetti";
 
