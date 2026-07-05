@@ -132,10 +132,26 @@ body {
 }
 
 .player-name {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   text-align: center;
   font-size: clamp(1.1rem, 4vw, 1.4rem);
   font-weight: bold;
+}
+
+.live-score-box {
+  width: fit-content;
+  margin: 0 auto 14px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: bold;
+  text-align: center;
+}
+
+.live-score-box span {
+  margin-right: 6px;
 }
 
 .board {
@@ -281,6 +297,18 @@ body {
   margin-top: 0;
 }
 
+.summary-section {
+  margin: 18px 0;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.summary-section h2 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+
 .summary-score {
   font-size: 2rem;
   font-weight: bold;
@@ -289,69 +317,13 @@ body {
 #summaryMatch,
 #summaryPrediction,
 #summaryActualResult,
-#summaryPredictionPoints {
+#summaryPredictionPoints,
+#summaryWinnerPoints,
+#summaryHomeGoalPoints,
+#summaryAwayGoalPoints,
+#summaryExactScorePoints {
   font-size: 1.05rem;
   font-weight: bold;
-}
-
-.full-bingo-message {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: min(86vw, 380px);
-  padding: 22px 30px;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 18px;
-  font-size: clamp(1.5rem, 7vw, 2rem);
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
-  z-index: 9999;
-}
-
-.full-bingo-message.visible {
-  display: block;
-}
-
-.play-again-button {
-  display: none;
-  position: fixed;
-  top: calc(50% + 86px);
-  left: 50%;
-  min-width: 180px;
-  padding: 14px 24px;
-  transform: translateX(-50%);
-  border: none;
-  border-radius: 12px;
-  background: #2e7d32;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-  z-index: 10000;
-}
-
-.play-again-button.visible {
-  display: block;
-}
-
-.line-message {
-  position: fixed;
-  top: 18px;
-  left: 50%;
-  padding: 12px 20px;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 999px;
-  font-size: clamp(1rem, 4vw, 1.3rem);
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  z-index: 9000;
-  animation: lineMessage 1.8s ease forwards;
 }
 
 .confetti {
@@ -390,24 +362,6 @@ body {
   100% {
     transform: scale(1);
     opacity: 1;
-  }
-}
-
-@keyframes lineMessage {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -12px);
-  }
-
-  15%,
-  80% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -12px);
   }
 }
 
