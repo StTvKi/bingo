@@ -64,32 +64,72 @@
       </div>
 
       <button class="finish-button" id="finishButton">
-        Se oppsummering og poeng
+        Se poeng og oppsummering
       </button>
     </section>
 
     <section class="summary-screen" id="summaryScreen">
       <div class="summary-box">
         <h1 id="summaryTitle"></h1>
-        <p id="summaryMatch"></p>
-        <p id="summaryPrediction"></p>
-        <p id="summaryActualResult"></p>
 
-        <div class="summary-section">
-          <h2>Resultatbonus</h2>
-          <p id="summaryWinnerPoints"></p>
-          <p id="summaryHomeGoalPoints"></p>
-          <p id="summaryAwayGoalPoints"></p>
-          <p id="summaryExactScorePoints"></p>
-          <p id="summaryPredictionPoints"></p>
+        <div class="summary-match-card">
+          <p id="summaryMatch"></p>
+          <p id="summaryPrediction"></p>
+          <p id="summaryActualResult"></p>
         </div>
 
-        <p id="summarySquares"></p>
-        <p id="summaryLines"></p>
-        <p class="summary-score" id="summaryScore"></p>
+        <div class="summary-card">
+          <h2>Resultatbonus</h2>
+
+          <div class="summary-row">
+            <span>Riktig vinner/uavgjort</span>
+            <strong id="summaryWinnerPoints"></strong>
+          </div>
+
+          <div class="summary-row">
+            <span id="summaryHomeGoalLabel"></span>
+            <strong id="summaryHomeGoalPoints"></strong>
+          </div>
+
+          <div class="summary-row">
+            <span id="summaryAwayGoalLabel"></span>
+            <strong id="summaryAwayGoalPoints"></strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Helt riktig resultat</span>
+            <strong id="summaryExactScorePoints"></strong>
+          </div>
+
+          <div class="summary-row summary-total-row">
+            <span>Resultatbonus totalt</span>
+            <strong id="summaryPredictionPoints"></strong>
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <h2>Bingopoeng</h2>
+
+          <div class="summary-row">
+            <span id="summarySquaresLabel"></span>
+            <strong id="summarySquares"></strong>
+          </div>
+
+          <div class="summary-row">
+            <span id="summaryLinesLabel"></span>
+            <strong id="summaryLines"></strong>
+          </div>
+
+          <div class="summary-row summary-total-row">
+            <span>Ruter + bingo totalt</span>
+            <strong id="summaryBoardPoints"></strong>
+          </div>
+        </div>
+
+        <div class="summary-final" id="summaryScore"></div>
 
         <button id="backToBoardButton">Tilbake til brettet</button>
-        <button id="newGameButton">Nytt brett</button>
+        <button id="newGameButton" class="secondary-button">Nytt brett</button>
       </div>
     </section>
   </main>

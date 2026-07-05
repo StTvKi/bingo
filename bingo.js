@@ -91,13 +91,18 @@ const summaryPrediction = document.getElementById("summaryPrediction");
 const summaryActualResult = document.getElementById("summaryActualResult");
 
 const summaryWinnerPoints = document.getElementById("summaryWinnerPoints");
+const summaryHomeGoalLabel = document.getElementById("summaryHomeGoalLabel");
 const summaryHomeGoalPoints = document.getElementById("summaryHomeGoalPoints");
+const summaryAwayGoalLabel = document.getElementById("summaryAwayGoalLabel");
 const summaryAwayGoalPoints = document.getElementById("summaryAwayGoalPoints");
 const summaryExactScorePoints = document.getElementById("summaryExactScorePoints");
 const summaryPredictionPoints = document.getElementById("summaryPredictionPoints");
 
+const summarySquaresLabel = document.getElementById("summarySquaresLabel");
 const summarySquares = document.getElementById("summarySquares");
+const summaryLinesLabel = document.getElementById("summaryLinesLabel");
 const summaryLines = document.getElementById("summaryLines");
+const summaryBoardPoints = document.getElementById("summaryBoardPoints");
 const summaryScore = document.getElementById("summaryScore");
 
 const board = document.getElementById("board");
@@ -370,28 +375,7 @@ function showSummary() {
   const scoreData = calculateScoreData();
   const predictionBreakdown = calculatePredictionBreakdown();
 
-  let rank = "";
-  let emoji = "";
-
-  if (scoreData.totalPoints >= 1000) {
-    emoji = "👑";
-    rank = "Bingomester";
-  } else if (scoreData.totalPoints >= 750) {
-    emoji = "🥇";
-    rank = "Gull";
-  } else if (scoreData.totalPoints >= 500) {
-    emoji = "🥈";
-    rank = "Sølv";
-  } else if (scoreData.totalPoints >= 250) {
-    emoji = "🥉";
-    rank = "Bronse";
-  } else if (scoreData.totalPoints >= 100) {
-    emoji = "⚽";
-    rank = "Supporter";
-  } else {
-    emoji = "🌱";
-    rank = "Nybegynner";
-  }
+  const rankData = getRank(scoreData.totalPoints);
 
   summaryTitle.textContent = `${currentPlayerName} sin poengsum`;
 
@@ -405,38 +389,77 @@ function showSummary() {
     `📍 Faktisk resultat: ${getActualResultText()}`;
 
   summaryWinnerPoints.textContent =
-    `Riktig vinner/uavgjort: ${predictionBreakdown.correctWinner ? POINTS.correctWinner : 0} poeng`;
+    `${predictionBreakdown.correctWinner ? POINTS.correctWinner : 0} poeng`;
+
+  summaryHomeGoalLabel.textContent =
+    `Riktig antall mål for ${MATCH.homeTeam}`;
 
   summaryHomeGoalPoints.textContent =
-    `Riktig antall mål for ${MATCH.homeTeam}: ${predictionBreakdown.correctHomeGoals ? POINTS.correctHomeGoals : 0} poeng`;
+    `${predictionBreakdown.correctHomeGoals ? POINTS.correctHomeGoals : 0} poeng`;
+
+  summaryAwayGoalLabel.textContent =
+    `Riktig antall mål for ${MATCH.awayTeam}`;
 
   summaryAwayGoalPoints.textContent =
-    `Riktig antall mål for ${MATCH.awayTeam}: ${predictionBreakdown.correctAwayGoals ? POINTS.correctAwayGoals : 0} poeng`;
+    `${predictionBreakdown.correctAwayGoals ? POINTS.correctAwayGoals : 0} poeng`;
 
   summaryExactScorePoints.textContent =
-    `Ekstra bonus for helt riktig resultat: ${predictionBreakdown.exactScore ? POINTS.exactScoreBonus : 0} poeng`;
+    `${predictionBreakdown.exactScore ? POINTS.exactScoreBonus : 0} poeng`;
 
   summaryPredictionPoints.textContent =
-    `🎯 Resultatbonus totalt: ${scoreData.predictionPoints} poeng`;
+    `${scoreData.predictionPoints} poeng`;
+
+  summarySquaresLabel.textContent =
+    `Markerte ruter (${scoreData.markedSquares})`;
 
   summarySquares.textContent =
-    `✅ Markerte ruter: ${scoreData.markedSquares} (${scoreData.squarePoints} poeng)`;
+    `${scoreData.squarePoints} poeng`;
+
+  summaryLinesLabel.textContent =
+    `Bingo (${scoreData.completedLineCount})`;
 
   summaryLines.textContent =
-    `🏆 Bingo: ${scoreData.completedLineCount} (${scoreData.linePoints} poeng)`;
+    `${scoreData.linePoints} poeng`;
+
+  summaryBoardPoints.textContent =
+    `${scoreData.squarePoints + scoreData.linePoints} poeng`;
 
   summaryScore.innerHTML = `
-    <div style="font-size:3rem;">${emoji}</div>
-    <div style="font-size:2.2rem;font-weight:bold;">
+    <div class="summary-emoji">${rankData.emoji}</div>
+    <div class="summary-total-points">
       ${scoreData.totalPoints} poeng
     </div>
-    <div style="font-size:1.4rem;margin-top:10px;">
-      <strong>${rank.toUpperCase()}</strong>!
+    <div class="summary-rank">
+      ${rankData.rank.toUpperCase()}!
     </div>
   `;
 
   gameScreen.classList.remove("visible");
   summaryScreen.classList.add("visible");
+}
+
+function getRank(totalPoints) {
+  if (totalPoints >= 1000) {
+    return { emoji: "👑", rank: "Bingomester" };
+  }
+
+  if (totalPoints >= 750) {
+    return { emoji: "🥇", rank: "Gull" };
+  }
+
+  if (totalPoints >= 500) {
+    return { emoji: "🥈", rank: "Sølv" };
+  }
+
+  if (totalPoints >= 250) {
+    return { emoji: "🥉", rank: "Bronse" };
+  }
+
+  if (totalPoints >= 100) {
+    return { emoji: "⚽", rank: "Supporter" };
+  }
+
+  return { emoji: "🌱", rank: "Nybegynner" };
 }
 
 function calculateScoreData() {
