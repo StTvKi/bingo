@@ -1,6 +1,6 @@
 const MATCH = {
   homeTeam: "Norge",
-  awayTeam: "Brasil",
+  awayTeam: "England",
 };
 
 const STORAGE_KEY = "footballBingoGame";
