@@ -2,38 +2,40 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="100%" height="100%" viewBox="0 0 2149 550" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
     <g transform="matrix(0.383212,0,0,0.383212,214.400019,15.260653)">
-        <g transform="matrix(2.60952,-0,-0,2.60952,-559.481068,-39.822974)">
-            <use xlink:href="#_Image1" x="304.734" y="353.469" width="288px" height="140px"/>
+        <g id="_Image1_" serif:id="_Image1" transform="matrix(6.041173,0,0,6.041173,-269.928977,756.587159)">
+            <use xlink:href="#_Image1" x="0" y="0" width="288px" height="140px"/>
         </g>
-        <rect x="170" y="130" width="860" height="860" style="fill:rgb(238,238,238);fill-opacity:0.18;"/>
         <circle cx="600" cy="560" r="430" style="fill:url(#_Radial2);"/>
         <circle cx="600" cy="560" r="395" style="fill:url(#_Radial3);"/>
-        <clipPath id="_clip4">
-            <circle cx="600" cy="560" r="430"/>
-        </clipPath>
-        <g clip-path="url(#_clip4)">
-            <g>
-                <circle cx="600" cy="560" r="430" style="fill:none;"/>
-                <clipPath id="_clip5">
-                    <circle cx="600" cy="560" r="430"/>
-                </clipPath>
-                <g clip-path="url(#_clip5)">
-                    <g transform="matrix(2.60952,-0,-0,2.60952,-559.481068,-39.822974)">
-                        <use xlink:href="#_Image6" x="192.005" y="7.915" width="569px" height="443px"/>
+        <g>
+            <clipPath id="_clip4">
+                <circle cx="600" cy="560" r="430"/>
+            </clipPath>
+            <g clip-path="url(#_clip4)">
+                <g>
+                    <circle cx="600" cy="560" r="430" style="fill:none;"/>
+                    <g>
+                        <clipPath id="_clip5">
+                            <circle cx="600" cy="560" r="430"/>
+                        </clipPath>
+                        <g clip-path="url(#_clip5)">
+                            <g id="_Image6_" serif:id="_Image6" transform="matrix(2.60952,0,0,2.60952,-58.44018,-19.168623)">
+                                <use xlink:href="#_Image6" x="0" y="0" width="569px" height="443px"/>
+                            </g>
+                        </g>
                     </g>
                 </g>
+                <rect x="170" y="130" width="860" height="860" style="fill:rgb(238,238,238);fill-opacity:0.18;"/>
             </g>
         </g>
         <circle cx="600" cy="560" r="430" style="fill:none;stroke:url(#_Linear7);stroke-width:26px;"/>
         <circle cx="600" cy="560" r="414" style="fill:none;stroke:white;stroke-opacity:0.28;stroke-width:5px;"/>
         <circle cx="600" cy="560" r="438" style="fill:none;stroke:rgb(68,68,68);stroke-opacity:0.12;stroke-width:3px;"/>
-        <g transform="matrix(2.60952,-0,-0,2.60952,-559.481068,-39.822974)">
-            <use xlink:href="#_Image8" x="316.846" y="55.235" width="263px" height="158px"/>
+        <g id="_Image8_" serif:id="_Image8" transform="matrix(2.60952,0,0,2.60952,267.334906,104.313863)">
+            <use xlink:href="#_Image8" x="0" y="0" width="263px" height="158px"/>
         </g>
-        <g transform="matrix(2.60952,-0,-0,2.60952,-559.481068,-39.822974)">
-            <use xlink:href="#_Image9" x="271.794" y="94.064" width="93px" height="226px"/>
-        </g>
-        <g transform="matrix(2.60952,-0,-0,2.60952,-559.481068,-39.822974)">
+        <g id="_Image9_" serif:id="_Image9" transform="matrix(2.60952,0,0,2.60952,149.770811,205.638915)">
+            <use xlink:href="#_Image9" x="0" y="0" width="93px" height="226px"/>
         </g>
         <g transform="matrix(1,0,0,1,310,205)">
             <path d="M0,-42L8,-8L42,0L8,8L0,42L-8,8L-42,0L-8,-8L0,-42Z" style="fill:white;fill-rule:nonzero;"/>
@@ -44,49 +46,50 @@
         <ellipse cx="635" cy="610" rx="330" ry="300" style="fill:white;fill-opacity:0.08;"/>
     </g>
     <g transform="matrix(0.383212,0,0,0.383212,1463.488527,15.260653)">
-        <g transform="matrix(2.60952,-0,-0,2.60952,-3819.002102,-39.822974)">
-            <use xlink:href="#_Image1" x="1553.823" y="353.469" width="288px" height="140px"/>
+        <g id="_Image1_1" serif:id="_Image1" transform="matrix(4.736768,0,0,4.736768,-70.029104,807.970562)">
+            <use xlink:href="#_Image1" x="0" y="0" width="288px" height="140px"/>
         </g>
-        <rect x="170" y="130" width="860" height="860" style="fill:rgb(238,238,238);fill-opacity:0.18;"/>
         <circle cx="600" cy="560" r="430" style="fill:url(#_Radial10);"/>
         <circle cx="600" cy="560" r="395" style="fill:url(#_Radial11);"/>
-        <clipPath id="_clip12">
-            <circle cx="600" cy="560" r="430"/>
-        </clipPath>
-        <g clip-path="url(#_clip12)">
-            <g>
-                <circle cx="600" cy="560" r="430" style="fill:none;"/>
-                <clipPath id="_clip13">
-                    <circle cx="600" cy="560" r="430"/>
-                </clipPath>
-                <g clip-path="url(#_clip13)">
-                    <g transform="matrix(2.60952,-0,-0,2.60952,-3819.002102,-39.822974)">
-                        <use xlink:href="#_Image14" x="1431.158" y="7.915" width="569px" height="443px"/>
-                    </g>
-                    <g transform="matrix(2.60952,0,0,2.60952,592.463297,560)">
-                        <g transform="matrix(1,0,0,1,-400,-240)">
-                            <g transform="matrix(32,0,0,32,0,0)">
-                                <rect x="0" y="0" width="25" height="15" style="fill:white;"/>
+        <g>
+            <clipPath id="_clip12">
+                <circle cx="600" cy="560" r="430"/>
+            </clipPath>
+            <g clip-path="url(#_clip12)">
+                <g>
+                    <circle cx="600" cy="560" r="430" style="fill:none;"/>
+                    <g>
+                        <clipPath id="_clip13">
+                            <circle cx="600" cy="560" r="430"/>
+                        </clipPath>
+                        <g clip-path="url(#_clip13)">
+                            <g id="_Image14_" serif:id="_Image14" transform="matrix(2.60952,0,0,2.60952,-84.366678,-19.168623)">
+                                <use xlink:href="#_Image14" x="0" y="0" width="569px" height="443px"/>
                             </g>
-                            <g transform="matrix(32,0,0,32,0,0)">
-                                <rect x="11" y="0" width="3" height="15" style="fill:rgb(206,17,36);"/>
-                                <rect x="0" y="6" width="25" height="3" style="fill:rgb(206,17,36);"/>
+                            <g transform="matrix(2.60952,0,0,2.60952,592.463297,560)">
+                                <g transform="matrix(1,0,0,1,-400,-240)">
+                                    <g transform="matrix(32,0,0,32,0,0)">
+                                        <rect x="0" y="0" width="25" height="15" style="fill:white;"/>
+                                    </g>
+                                    <g transform="matrix(32,0,0,32,0,0)">
+                                        <path d="M11,9L0,9L0,6L11,6L11,0L14,0L14,6L25,6L25,9L14,9L14,15L11,15L11,9Z" style="fill:rgb(206,17,36);"/>
+                                    </g>
+                                </g>
                             </g>
                         </g>
                     </g>
                 </g>
+                <rect x="170" y="130" width="860" height="860" style="fill:rgb(238,238,238);fill-opacity:0.18;"/>
             </g>
         </g>
         <circle cx="600" cy="560" r="430" style="fill:none;stroke:url(#_Linear15);stroke-width:26px;"/>
         <circle cx="600" cy="560" r="414" style="fill:none;stroke:white;stroke-opacity:0.28;stroke-width:5px;"/>
         <circle cx="600" cy="560" r="438" style="fill:none;stroke:rgb(68,68,68);stroke-opacity:0.12;stroke-width:3px;"/>
-        <g transform="matrix(2.60952,-0,-0,2.60952,-3819.002102,-39.822974)">
-            <use xlink:href="#_Image8" x="1565.934" y="55.235" width="263px" height="158px"/>
+        <g id="_Image8_1" serif:id="_Image8" transform="matrix(2.60952,0,0,2.60952,267.33399,104.313863)">
+            <use xlink:href="#_Image8" x="0" y="0" width="263px" height="158px"/>
         </g>
-        <g transform="matrix(2.60952,-0,-0,2.60952,-3819.002102,-39.822974)">
-            <use xlink:href="#_Image9" x="1520.882" y="94.064" width="93px" height="226px"/>
-        </g>
-        <g transform="matrix(2.60952,-0,-0,2.60952,-3819.002102,-39.822974)">
+        <g id="_Image9_1" serif:id="_Image9" transform="matrix(2.60952,0,0,2.60952,149.769895,205.638915)">
+            <use xlink:href="#_Image9" x="0" y="0" width="93px" height="226px"/>
         </g>
         <g transform="matrix(1,0,0,1,310,205)">
             <path d="M0,-42L8,-8L42,0L8,8L0,42L-8,8L-42,0L-8,-8L0,-42Z" style="fill:white;fill-rule:nonzero;"/>
@@ -97,19 +100,19 @@
         <ellipse cx="635" cy="610" rx="330" ry="300" style="fill:white;fill-opacity:0.08;"/>
     </g>
     <g transform="matrix(1,0,0,1,-70.970938,7.438203)">
-        <g transform="matrix(118.894463,0,0,118.894463,719.987829,504.945839)">
+        <g transform="matrix(1,0,0,1,296.659,504.946)">
+            <text x="0px" y="0px" style="font-family:'Belgium', fantasy;font-size:118.894px;">NORGE</text>
         </g>
-        <text x="296.659px" y="504.946px" style="font-family:'Belgium', fantasy;font-size:118.894px;">NORGE</text>
     </g>
     <g transform="matrix(1,0,0,1,1136.161989,7.438203)">
-        <g transform="matrix(118.894463,0,0,118.894463,827.039288,504.945839)">
+        <g transform="matrix(1,0,0,1,296.659,504.946)">
+            <text x="0px" y="0px" style="font-family:'Belgium', fantasy;font-size:118.894px;">ENGLAND</text>
         </g>
-        <text x="296.659px" y="504.946px" style="font-family:'Belgium', fantasy;font-size:118.894px;">ENGLAND</text>
     </g>
     <g transform="matrix(0.698738,0,0,0.698738,383.854745,142.291783)">
-        <g transform="matrix(160.494634,0,0,160.494634,1054.943857,363.983833)">
+        <g transform="matrix(1,0,0,1,865.845,363.984)">
+            <text x="0px" y="0px" style="font-family:'Belgium', fantasy;font-size:160.495px;">VS</text>
         </g>
-        <text x="865.845px" y="363.984px" style="font-family:'Belgium', fantasy;font-size:160.495px;">VS</text>
     </g>
     <defs>
         <image id="_Image1" width="288px" height="140px" xlink:href="data:image/png;base64,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"/>
